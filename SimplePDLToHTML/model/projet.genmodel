@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/mini.projet/src-gen" creationIcons="false" editDirectory="/mini.projet.edit/src-gen"
+    editorDirectory="/mini.projet.editor/src-gen" modelPluginID="mini.projet" modelName="Projet"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="21.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>projet.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="Projet" basePackage="mini" disposableProviderFactory="true"
+      ecorePackage="projet.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="projet.ecore#//WorkSequenceType">
+      <genEnumLiterals ecoreEnumLiteral="projet.ecore#//WorkSequenceType/startToStart"/>
+      <genEnumLiterals ecoreEnumLiteral="projet.ecore#//WorkSequenceType/finishToStart"/>
+      <genEnumLiterals ecoreEnumLiteral="projet.ecore#//WorkSequenceType/startToFinish"/>
+      <genEnumLiterals ecoreEnumLiteral="projet.ecore#//WorkSequenceType/finishToFinish"/>
+    </genEnums>
+    <genClasses ecoreClass="projet.ecore#//Process">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference projet.ecore#//Process/processElements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//Process/name"/>
+    </genClasses>
+    <genClasses ecoreClass="projet.ecore#//ProcessElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//ProcessElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//ProcessElement/description"/>
+    </genClasses>
+    <genClasses ecoreClass="projet.ecore#//WorkDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//WorkDefinition/duration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//WorkDefinition/startDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//WorkDefinition/endDate"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference projet.ecore#//WorkDefinition/resource"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference projet.ecore#//WorkDefinition/linksToSuccessor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference projet.ecore#//WorkDefinition/linksToPredecessor"/>
+    </genClasses>
+    <genClasses ecoreClass="projet.ecore#//WorkSequence">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//WorkSequence/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference projet.ecore#//WorkSequence/predecessor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference projet.ecore#//WorkSequence/successor"/>
+    </genClasses>
+    <genClasses ecoreClass="projet.ecore#//Resource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//Resource/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference projet.ecore#//Resource/workdefinition"/>
+    </genClasses>
+    <genClasses ecoreClass="projet.ecore#//Humain">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//Humain/role"/>
+    </genClasses>
+    <genClasses ecoreClass="projet.ecore#//Materiel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//Materiel/quantite"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

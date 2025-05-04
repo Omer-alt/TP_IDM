@@ -1,0 +1,15 @@
+module org.example.Generate
+
+workflow AcceleoWorkflow {
+    component = org.eclipse.acceleo.engine.components.AcceleoComponent {
+        model.uri = 'platform:/resource/SimplePDLToHTML/model/DevLogicielVModel.xmi'
+        target.root = 'src-gen/'
+        template.root = 'SimplePDLToHTML::main::'
+        
+		register = {
+		    ePackage = 'http://www.mini.projet'
+		    class = 'projet.impl.ProjetPackageImpl'
+		    genModel = 'platform:/resource/SimplePDLToHTML/model/projet.genmodel'
+		}
+    }
+}

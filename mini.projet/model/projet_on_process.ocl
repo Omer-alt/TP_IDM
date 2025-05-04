@@ -1,0 +1,94 @@
+import 'projet.ecore'
+
+package projet
+
+context Process
+--
+-- example invariant with a custom error message to verify that
+-- the 'processElements' property of all 'projet::Process' instances is non-null
+--
+inv NonNull_processElements('The \'processElements\' property of "' + self.toString() + '" is null'):
+	processElements <> null
+	
+	 
+inv nonEmptyProject : 	
+self.processElements ->size() >= 1 
+
+-- Pas de cycle dans les depandances
+context WorkDefinition 
+
+def: allSuccessors() : Set(WorkDefinition) =
+  self.linksToSuccessor.successor->asSet()
+    ->union(self.linksToSuccessor.successor->collect(t | t.allSuccessors())->flatten()->asSet())
+
+inv noCycle : 	not self.allSuccessors()->includes(self) 
+
+
+--Deux tâches ne doivent pas avoir le même nom
+context WorkDefinition  
+inv uniqueName:  
+  WorkDefinition.allInstances()  
+    ->forAll(wd1, wd2 | wd1 <> wd2 implies wd1.name <> wd2.name)  
+
+
+-- Une tâche doit avoir au moins une ressource assignée (humaine ou matérielle).
+context WorkDefinition  
+inv atLeastOneResource:  
+  self.resource->size() >= 1   
+
+
+-- Aucune tache ne depend d'elle meme
+context WorkSequence 
+inv noReflexivity : 	self.predecessor <> self.successor
+ 
+ 
+-- Une ressource matérielle ne peut pas avoir une quantité nulle ou négative. 
+context Materiel  
+inv quantityPositive:  
+  self.quantite > 0  
+
+-- Le rôle d’un humain doit être spécifié (non vide) 
+context Humain  
+inv roleNotEmpty:  
+  self.role.size() >= 1    
+ 
+
+context WorkSequence
+inv temporalCoherence:
+    if (self.predecessor.endDate <> null and self.successor.startDate <> null) then
+        if (self.type = WorkSequenceType::finishToStart) then
+            self.predecessor.endDate <= self.successor.startDate
+        else
+            if (self.type = WorkSequenceType::startToStart) then
+                self.predecessor.startDate <= self.successor.startDate
+            else
+                if (self.type = WorkSequenceType::finishToFinish) then
+                    self.predecessor.endDate <= self.successor.endDate
+                else
+                    if (self.type = WorkSequenceType::startToFinish) then
+                        self.predecessor.startDate <= self.successor.endDate
+                    else
+                        true
+                    endif
+                endif
+            endif
+        endif
+    else
+        true
+    endif
+
+--inv temporalCoherence:
+--    (self.predecessor.endDates = null or self.successor.startDate = null) 
+--    or 
+--    (
+--        (self.type = WorkSequenceType::finishToStart implies self.predecessor.endDates <= self.successor.startDate)
+--        and
+--        (self.type = WorkSequenceType::startToStart implies self.predecessor.startDate <= self.successor.startDate)
+--        and
+--        (self.type = WorkSequenceType::finishToFinish implies self.predecessor.endDates <= self.successor.endDates)
+--        and
+--        (self.type = WorkSequenceType::startToFinish implies self.predecessor.startDate <= self.successor.endDates)
+--    )    
+    
+    
+endpackage    

@@ -1,0 +1,209 @@
+<html>
+  <head>
+    <title>Processus : DevLogicielVModel</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; }
+      h1, h2 { color: #2C3E50; }
+      table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+      th, td { border: 1px solid #ddd; padding: 8px; }
+      th { background-color: #f2f2f2; text-align: left; }
+    </style>
+  </head>
+  <body>
+    <h1>Processus : DevLogicielVModel</h1>
+
+    <h2>Liste des tâches (WorkDefinition)</h2>
+    <table>
+      <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Date début</th>
+        <th>Date fin</th>
+        <th>Ressources</th>
+      </tr>
+        <tr>
+          <td>Exigences</td>
+          <td>Définition des besoins fonctionnels et techniques.</td>
+          <td>Wed Jan 01 00:00:00 WAT 2025</td>
+          <td>Fri Jan 31 00:00:00 WAT 2025</td>
+          <td>
+            <ul>
+                <li>
+                    Humain : Omer - rôle : Analyste Métier
+                </li>
+                <li>
+                    Humain : Omer-alt - rôle : Analyste Métier
+                </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>ConceptionSystème</td>
+          <td>Élaboration de l’architecture globale du système</td>
+          <td>Sat Feb 01 00:00:00 WAT 2025</td>
+          <td>Fri Feb 28 00:00:00 WAT 2025</td>
+          <td>
+            <ul>
+                <li>
+                    Humain : Omer-ai - rôle : Architecte Système
+                </li>
+                <li>
+                    Matériel : OutilsUML - quantité : 1
+                </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>ConceptionLogicielle</td>
+          <td>Conception détaillée des composants logiciels</td>
+          <td>Sat Feb 01 00:00:00 WAT 2025</td>
+          <td>Sat Mar 15 00:00:00 WAT 2025</td>
+          <td>
+            <ul>
+                <li>
+                    Humain : Arthur - rôle : Architecte Logiciel
+                </li>
+                <li>
+                    Humain : Arthur-ai - rôle : Architecte Logiciel
+                </li>
+                <li>
+                    Humain : Arthur-alt - rôle : Architecte Logiciel
+                </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Codage</td>
+          <td>Implémentation du code source selon les spécifications</td>
+          <td>Sat Mar 01 00:00:00 WAT 2025</td>
+          <td>Sat Mar 15 00:00:00 WAT 2025</td>
+          <td>
+            <ul>
+                <li>
+                    Humain : Eric - rôle : Développeur
+                </li>
+                <li>
+                    Humain : Eric-ai - rôle : Développeur
+                </li>
+                <li>
+                    Humain : Eric-alt - rôle : Développeur
+                </li>
+                <li>
+                    Humain : Eric-try - rôle : Développeur
+                </li>
+                <li>
+                    Humain : Erico - rôle : Développeur
+                </li>
+                <li>
+                    Matériel : IDE - quantité : 5
+                </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>TestsUnitaires</td>
+          <td>Vérification individuelle des modules</td>
+          <td>Sat Mar 01 00:00:00 WAT 2025</td>
+          <td>Thu Apr 10 00:00:00 WAT 2025</td>
+          <td>
+            <ul>
+                <li>
+                    Humain : Junior - rôle : Testeur
+                </li>
+                <li>
+                    Humain : Junior-ai - rôle : Testeur
+                </li>
+                <li>
+                    Matériel : JUnit - quantité : 1
+                </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>TestsIntegration</td>
+          <td>Validation des interactions entre composants</td>
+          <td>Fri Apr 11 00:00:00 WAT 2025</td>
+          <td>Thu May 15 00:00:00 WAT 2025</td>
+          <td>
+            <ul>
+                <li>
+                    Humain : Junior-alt - rôle : Testeur
+                </li>
+                <li>
+                    Humain : Junior-try - rôle : Testeur
+                </li>
+                <li>
+                    Matériel : ServeurTest - quantité : 1
+                </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Validation</td>
+          <td>Acceptation finale par le client</td>
+          <td>Thu May 01 00:00:00 WAT 2025</td>
+          <td>Tue May 20 00:00:00 WAT 2025</td>
+          <td>
+            <ul>
+                <li>
+                    Humain : Bill Gates - rôle : Client
+                </li>
+            </ul>
+          </td>
+        </tr>
+    </table>
+
+    <h2>Dépendances (WorkSequence)</h2>
+    <table>
+      <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Prédécesseur</th>
+        <th>Successeur</th>
+      </tr>
+        <tr>
+          <td>Exigences ->  ConceptionSystème</td>
+          <td>La conception ne débute qu’après validation des exigences</td>
+          <td>finishToStart</td>
+          <td>Exigences</td>
+          <td>ConceptionSystème</td>
+        </tr>
+        <tr>
+          <td>ConceptionSystème -> ConceptionLogicielle</td>
+          <td>Raffinement simultané de l’architecture et de la conception détaillée</td>
+          <td>startToStart</td>
+          <td>ConceptionSystème</td>
+          <td>ConceptionLogicielle</td>
+        </tr>
+        <tr>
+          <td>ConceptionLogicielle -> Codage</td>
+          <td>Alignement des spécifications et du code avant finalisation</td>
+          <td>finishToFinish</td>
+          <td>ConceptionLogicielle</td>
+          <td>Codage</td>
+        </tr>
+        <tr>
+          <td>Codage -> TestsUnitaires</td>
+          <td>Tests unitaires lancés en parallèle avec le développement</td>
+          <td>startToStart</td>
+          <td>Codage</td>
+          <td>TestsUnitaires</td>
+        </tr>
+        <tr>
+          <td>TestsUnitaires -> TestsIntegration</td>
+          <td>Tests d’intégration déclenchés après validation des modules</td>
+          <td>finishToStart</td>
+          <td>TestsUnitaires</td>
+          <td>TestsIntegration</td>
+        </tr>
+        <tr>
+          <td>TestsIntegration -> Validation</td>
+          <td>La validation client doit être terminée avant la clôture des tests d’intégration</td>
+          <td>startToFinish</td>
+          <td>TestsIntegration</td>
+          <td>Validation</td>
+        </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projet:Process
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:projet="http://www.mini/projet"
+    xsi:schemaLocation="http://www.mini/projet projet.ecore"
+    name="PréparerExamen">
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="Réviser cours"
+      description="Etape de révision des cours, peu etre solitaire ou en groupe"
+      linksToSuccessor="//@processElements.4">
+    <resource
+        xsi:type="projet:Humain"
+        name="Omer"
+        role="étudiant"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Eric"
+        role="étudiant"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Arthur"
+        role="étudiant"/>
+    <resource
+        xsi:type="projet:Materiel"
+        name="Cours"
+        quantite="1"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="Exercices"
+      description="Traiter les fiches et les exercices"
+      linksToSuccessor="//@processElements.5"
+      linksToPredecessor="//@processElements.4">
+    <resource
+        xsi:type="projet:Humain"
+        name="Omer"
+        role="traiter les exercices "/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Eric"
+        role="traiter les exercices "/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Arthur"
+        role="traiter les exercices "/>
+    <resource
+        xsi:type="projet:Materiel"
+        name="Essembles d'exercices"
+        quantite="2"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="Lire ses Notes"
+      description="Lecture des fiches de révision, des notes complémentaires et des possibles corrections"
+      linksToSuccessor="//@processElements.6"
+      linksToPredecessor="//@processElements.5">
+    <resource
+        xsi:type="projet:Materiel"
+        name="Corrections"
+        quantite="2"/>
+    <resource
+        xsi:type="projet:Materiel"
+        name="Notes complémentaires"
+        quantite="2"/>
+    <resource
+        xsi:type="projet:Materiel"
+        name="Fiches de lectures"
+        quantite="2"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Omer"
+        role="lecteur"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Eric"
+        role="lecteur"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Arthur"
+        role="lecteur"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="Passer examen"
+      description="Aller faire l'examen"
+      linksToPredecessor="//@processElements.6">
+    <resource
+        xsi:type="projet:Materiel"
+        name="Epreuve"
+        quantite="1"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkSequence"
+      name="Réviser vers Exercices"
+      description="Pour faire des exercces, il faut réviser"
+      type="startToFinish"
+      predecessor="//@processElements.0"
+      successor="//@processElements.1"/>
+  <processElements
+      xsi:type="projet:WorkSequence"
+      name="Exercices vers Lire Notes"
+      description="Après avoir traité suffisament d'exercices, on  constitue un ensemble de documents en rapports avec l'examen."
+      predecessor="//@processElements.1"
+      successor="//@processElements.2"/>
+  <processElements
+      xsi:type="projet:WorkSequence"
+      name="Lire Notes vers Passer Examen"
+      description="Il est necessaire de réviser avant de passer son examen"
+      predecessor="//@processElements.2"
+      successor="//@processElements.3"/>
+</projet:Process>

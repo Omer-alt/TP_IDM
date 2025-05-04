@@ -1,0 +1,76 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.mini/projet')]
+
+[template public generateElement(p : Process)]
+[comment @main /]
+[file (p.name + '.html', false, 'UTF-8')]
+<html>
+  <head>
+    <title>Processus : [p.name/]</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; }
+      h1, h2 { color: #2C3E50; }
+      table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+      th, td { border: 1px solid #ddd; padding: 8px; }
+      th { background-color: #f2f2f2; text-align: left; }
+    </style>
+  </head>
+  <body>
+    <h1>Processus : [p.name/]</h1>
+
+    <h2>Liste des tâches (WorkDefinition)</h2>
+    <table>
+      <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Date début</th>
+        <th>Date fin</th>
+        <th>Ressources</th>
+      </tr>
+      [for (wd : WorkDefinition | p.processElements->filter(WorkDefinition))]
+        <tr>
+          <td>[wd.name/]</td>
+          <td>[wd.description/]</td>
+          <td>[wd.startDate/]</td>
+          <td>[wd.endDate/]</td>
+          <td>
+            <ul>
+              [for (res : Resource | wd.resource)]
+                <li>
+                  [if (res.oclIsTypeOf(Humain))]
+                    Humain : [(res.oclAsType(Humain).name)/] - rôle : [(res.oclAsType(Humain).role)/]
+                  [/if]
+                  [if (res.oclIsTypeOf(Materiel))]
+                    Matériel : [(res.oclAsType(Materiel).name)/] - quantité : [(res.oclAsType(Materiel).quantite)/]
+                  [/if]
+                </li>
+              [/for]
+            </ul>
+          </td>
+        </tr>
+      [/for]
+    </table>
+
+    <h2>Dépendances (WorkSequence)</h2>
+    <table>
+      <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Prédécesseur</th>
+        <th>Successeur</th>
+      </tr>
+      [for (ws : WorkSequence | p.processElements->filter(WorkSequence))]
+        <tr>
+          <td>[ws.name/]</td>
+          <td>[ws.description/]</td>
+          <td>[if (ws.type <> null)][ws.type/][/if]</td>
+          <td>[if (ws.predecessor <> null)][ws.predecessor.name/][/if]</td>
+          <td>[if (ws.successor <> null)][ws.successor.name/][/if]</td>
+        </tr>
+      [/for]
+    </table>
+  </body>
+</html>
+[/file]
+[/template]

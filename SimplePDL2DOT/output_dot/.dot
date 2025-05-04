@@ -1,0 +1,15 @@
+digraph invalid {
+    rankdir=LR;
+	node [shape=box, style="rounded,filled", fillcolor="#e6f3ff"];
+
+    // nœuds : WorkDefinitions
+		"Réviser cours" [label="Réviser cours\n(startDate: , endDate:)"];
+		"Exercices" [label="Exercices\n(startDate: , endDate:)"];
+		"Lire ses Notes" [label="Lire ses Notes\n(startDate: , endDate:)"];
+		"Passer examen" [label="Passer examen\n(startDate: , endDate:)"];
+
+    // arêtes : WorkSequences
+        "Réviser cours" -> "Exercices" [label="startToStart", fontsize=10];
+        "Exercices" -> "Lire ses Notes" [label="finishToStart", fontsize=10];
+        "Lire ses Notes" -> "Passer examen" [label="startToStart", fontsize=10];
+}

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projet:Process
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:projet="http://www.mini/projet"
+    xsi:schemaLocation="http://www.mini/projet projet.ecore"
+    name="DevLogicielVModel">
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="Exigences"
+      description="Définition des besoins fonctionnels et techniques."
+      startDate="2025-01-01T00:00:00.000+0100"
+      endDate="2025-01-31T00:00:00.000+0100"
+      linksToSuccessor="//@processElements.7">
+    <resource
+        xsi:type="projet:Humain"
+        name="Omer"
+        role="Analyste Métier"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Omer-alt"
+        role="Analyste Métier"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="ConceptionSystème"
+      description="Élaboration de l’architecture globale du système"
+      startDate="2025-02-01T00:00:00.000+0100"
+      endDate="2025-02-28T00:00:00.000+0100"
+      linksToSuccessor="//@processElements.8"
+      linksToPredecessor="//@processElements.7">
+    <resource
+        xsi:type="projet:Humain"
+        name="Omer-ai"
+        role="Architecte Système"/>
+    <resource
+        xsi:type="projet:Materiel"
+        name="OutilsUML"
+        quantite="1"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="ConceptionLogicielle"
+      description="Conception détaillée des composants logiciels"
+      startDate="2025-02-01T00:00:00.000+0100"
+      endDate="2025-03-15T00:00:00.000+0100"
+      linksToSuccessor="//@processElements.9"
+      linksToPredecessor="//@processElements.8">
+    <resource
+        xsi:type="projet:Humain"
+        name="Arthur"
+        role="Architecte Logiciel"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Arthur-ai"
+        role="Architecte Logiciel"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Arthur-alt"
+        role="Architecte Logiciel"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="Codage"
+      description="Implémentation du code source selon les spécifications"
+      startDate="2025-03-01T00:00:00.000+0100"
+      endDate="2025-03-15T00:00:00.000+0100"
+      linksToSuccessor="//@processElements.10"
+      linksToPredecessor="//@processElements.9">
+    <resource
+        xsi:type="projet:Humain"
+        name="Eric"
+        role="Développeur"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Eric-ai"
+        role="Développeur"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Eric-alt"
+        role="Développeur"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Eric-try"
+        role="Développeur"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Erico"
+        role="Développeur"/>
+    <resource
+        xsi:type="projet:Materiel"
+        name="IDE"
+        quantite="5"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="TestsUnitaires"
+      description="Vérification individuelle des modules"
+      startDate="2025-03-01T00:00:00.000+0100"
+      endDate="2025-04-10T00:00:00.000+0100"
+      linksToSuccessor="//@processElements.11"
+      linksToPredecessor="//@processElements.10">
+    <resource
+        xsi:type="projet:Humain"
+        name="Junior"
+        role="Testeur"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Junior-ai"
+        role="Testeur"/>
+    <resource
+        xsi:type="projet:Materiel"
+        name="JUnit"
+        quantite="1"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="TestsIntegration"
+      description="Validation des interactions entre composants"
+      startDate="2025-04-11T00:00:00.000+0100"
+      endDate="2025-05-15T00:00:00.000+0100"
+      linksToSuccessor="//@processElements.12"
+      linksToPredecessor="//@processElements.11">
+    <resource
+        xsi:type="projet:Humain"
+        name="Junior-alt"
+        role="Testeur"/>
+    <resource
+        xsi:type="projet:Humain"
+        name="Junior-try"
+        role="Testeur"/>
+    <resource
+        xsi:type="projet:Materiel"
+        name="ServeurTest"
+        quantite="1"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkDefinition"
+      name="Validation"
+      description="Acceptation finale par le client"
+      startDate="2025-05-01T00:00:00.000+0100"
+      endDate="2025-05-20T00:00:00.000+0100"
+      linksToPredecessor="//@processElements.12">
+    <resource
+        xsi:type="projet:Humain"
+        name="Bill Gates"
+        role="Client"/>
+  </processElements>
+  <processElements
+      xsi:type="projet:WorkSequence"
+      name="Exigences ->  ConceptionSystème"
+      description="La conception ne débute qu’après validation des exigences"
+      type="finishToStart"
+      predecessor="//@processElements.0"
+      successor="//@processElements.1"/>
+  <processElements
+      xsi:type="projet:WorkSequence"
+      name="ConceptionSystème -> ConceptionLogicielle"
+      description="Raffinement simultané de l’architecture et de la conception détaillée"
+      predecessor="//@processElements.1"
+      successor="//@processElements.2"/>
+  <processElements
+      xsi:type="projet:WorkSequence"
+      name="ConceptionLogicielle -> Codage"
+      description="Alignement des spécifications et du code avant finalisation"
+      type="finishToFinish"
+      predecessor="//@processElements.2"
+      successor="//@processElements.3"/>
+  <processElements
+      xsi:type="projet:WorkSequence"
+      name="Codage -> TestsUnitaires"
+      description="Tests unitaires lancés en parallèle avec le développement"
+      predecessor="//@processElements.3"
+      successor="//@processElements.4"/>
+  <processElements
+      xsi:type="projet:WorkSequence"
+      name="TestsUnitaires -> TestsIntegration"
+      description="Tests d’intégration déclenchés après validation des modules"
+      type="finishToStart"
+      predecessor="//@processElements.4"
+      successor="//@processElements.5"/>
+  <processElements
+      xsi:type="projet:WorkSequence"
+      name="TestsIntegration -> Validation"
+      description="La validation client doit être terminée avant la clôture des tests d’intégration"
+      type="startToFinish"
+      predecessor="//@processElements.5"
+      successor="//@processElements.6"/>
+</projet:Process>

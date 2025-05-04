@@ -1,0 +1,72 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.mini.projet', 'http://www.eclipse.org/emf/2002/Ecore')]
+
+[template public generateElement(p : Process)]
+[file (p.name + '.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Processus <%p.name%></title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>📋 Processus <%p.name%></h1>
+
+    <!-- Section WorkDefinitions -->
+    <h2>🔧 Tâches</h2>
+    <table>
+        <tr><th>Nom</th><th>Description</th><th>Dates</th><th>Ressources</th></tr>
+        [for (pe : ProcessElement | p.processElements)]
+            [if (pe.oclIsKindOf(WorkDefinition))]
+                [let wd = pe.oclAsType(WorkDefinition)]
+                <tr>
+                    <td><b><%wd.name%></b></td>
+                    <td><%wd.description%></td>
+                    <td>
+                        🗓️ <%wd.startDate%> ➔ <%wd.endDate%>
+                    </td>
+                    <td>
+                        [for (res : Resource | wd.resources)]
+                            [if (res.oclIsKindOf(Humain))]
+                                👤 <%res.oclAsType(Humain).role%><br/>
+                            [else]
+                                🛠️ <%res.oclAsType(Materiel).name%> 
+                                (x<%res.oclAsType(Materiel).quantite%>)<br/>
+                            [/if]
+                        [/for]
+                    </td>
+                </tr>
+                [/let]
+            [/if]
+        [/for]
+    </table>
+
+    <!-- Section WorkSequences -->
+    <h2>⛓️ Dépendances</h2>
+    <table>
+        <tr><th>Prédécesseur</th><th>Successeur</th><th>Type</th><th>Contraintes</th></tr>
+        [for (pe : ProcessElement | p.processElements)]
+            [if (pe.oclIsKindOf(WorkSequence))]
+                [let ws = pe.oclAsType(WorkSequence)]
+                <tr>
+                    <td><%ws.predecessor.name%></td>
+                    <td><%ws.successor.name%></td>
+                    <td><%ws.type.toString()%></td>
+                    <td>
+                        [if (ws.predecessor.endDate <> null and ws.successor.startDate <> null)]
+                            ⚖️ <%ws.predecessor.endDate%> ≤ <%ws.successor.startDate%>
+                        [/if]
+                    </td>
+                </tr>
+                [/let]
+            [/if]
+        [/for]
+    </table>
+</body>
+</html>
+[/file]
+[/template]

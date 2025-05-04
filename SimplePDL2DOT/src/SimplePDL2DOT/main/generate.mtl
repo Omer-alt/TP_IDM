@@ -1,0 +1,38 @@
+[comment encoding = UTF-8 /]
+
+[module generate('http://www.mini/projet')]
+
+[template public generateElement(p : Process)]
+[comment @main/]
+[file (p.name + '.dot', false, 'UTF-8')]
+digraph [p.name.toUpper()/] {
+    rankdir=LR;
+	node ['['/]shape=box, style="rounded,filled", fillcolor="#e6f3ff"];
+
+    // nœuds : WorkDefinitions
+    [for (wd : WorkDefinition | p.processElements->select(e | e.oclIsKindOf(WorkDefinition)))]
+		"[wd.name/]" ['['/]label="[wd.name/]\n(startDate: [wd.startDate/], endDate:[wd.endDate/])"];
+[comment]        "[wd.name/]" [label="[wd.name/]\n(Duration: [wd.duration/])"];[/comment]
+    [/for]
+
+    // arêtes : WorkSequences
+    [for (ws : WorkSequence | p.processElements->select(e | e.oclIsKindOf(WorkSequence)))]
+        "[ws.predecessor.name/]" -> "[ws.successor.name/]" ['['/]label="[ws.type.toString()/]", fontsize=10];
+    [/for]
+}
+[/file]
+[/template]
+
+[comment][template private sequenceTypeToString(t : WorkSequenceType): String]
+    [if (t = WorkSequenceType::startToStart)]
+        SS
+    [elseif (t = WorkSequenceType::finishToStart)]
+        FS
+    [elseif (t = WorkSequenceType::startToFinish)]
+        SF
+    [else]
+        FF
+    [/if]
+[/template][/comment]
+
+

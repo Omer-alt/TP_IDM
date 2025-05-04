@@ -1,0 +1,21 @@
+digraph DEVLOGICIELVMODEL {
+    rankdir=LR;
+	node [shape=box, style="rounded,filled", fillcolor="#e6f3ff"];
+
+    // nœuds : WorkDefinitions
+		"Exigences" [label="Exigences\n(startDate: Wed Jan 01 00:00:00 WAT 2025, endDate:Fri Jan 31 00:00:00 WAT 2025)"];
+		"ConceptionSystème" [label="ConceptionSystème\n(startDate: Sat Feb 01 00:00:00 WAT 2025, endDate:Fri Feb 28 00:00:00 WAT 2025)"];
+		"ConceptionLogicielle" [label="ConceptionLogicielle\n(startDate: Sat Feb 01 00:00:00 WAT 2025, endDate:Sat Mar 15 00:00:00 WAT 2025)"];
+		"Codage" [label="Codage\n(startDate: Sat Mar 01 00:00:00 WAT 2025, endDate:Sat Mar 15 00:00:00 WAT 2025)"];
+		"TestsUnitaires" [label="TestsUnitaires\n(startDate: Sat Mar 01 00:00:00 WAT 2025, endDate:Thu Apr 10 00:00:00 WAT 2025)"];
+		"TestsIntegration" [label="TestsIntegration\n(startDate: Fri Apr 11 00:00:00 WAT 2025, endDate:Thu May 15 00:00:00 WAT 2025)"];
+		"Validation" [label="Validation\n(startDate: Thu May 01 00:00:00 WAT 2025, endDate:Tue May 20 00:00:00 WAT 2025)"];
+
+    // arêtes : WorkSequences
+        "Exigences" -> "ConceptionSystème" [label="finishToStart", fontsize=10];
+        "ConceptionSystème" -> "ConceptionLogicielle" [label="startToStart", fontsize=10];
+        "ConceptionLogicielle" -> "Codage" [label="finishToFinish", fontsize=10];
+        "Codage" -> "TestsUnitaires" [label="startToStart", fontsize=10];
+        "TestsUnitaires" -> "TestsIntegration" [label="finishToStart", fontsize=10];
+        "TestsIntegration" -> "Validation" [label="startToFinish", fontsize=10];
+}
