@@ -1,0 +1,110 @@
+Process "DevLogicielVModel" {
+  processElements {
+    // WorkDefinitions
+    WorkDefinition "Exigences" {
+      description "Définition des besoins fonctionnels et techniques."
+      startDate "2025-01-01T00:00:00.000+0100"
+      endDate "2025-01-31T00:00:00.000+0100"
+      resource {
+        Humain "Omer" { role "Analyste Métier" },
+        Humain "Omer-alt" { role "Analyste Métier" }
+      }
+    },
+    WorkDefinition "ConceptionSystème" {
+      description "Élaboration de l’architecture globale du système"
+      startDate "2025-02-01T00:00:00.000+0100"
+      endDate "2025-02-28T00:00:00.000+0100"
+      resource {
+        Humain "Omer-ai" { role "Architecte Système" },
+        Materiel "OutilsUML" { quantite 1 }
+      }
+    },
+    WorkDefinition "ConceptionLogicielle" {
+      description "Conception détaillée des composants logiciels"
+      startDate "2025-02-01T00:00:00.000+0100"
+      endDate "2025-03-15T00:00:00.000+0100"
+      resource {
+        Humain "Arthur" { role "Architecte Logiciel" },
+        Humain "Arthur-ai" { role "Architecte Logiciel" },
+        Humain "Arthur-alt" { role "Architecte Logiciel" }
+      }
+    },
+    WorkDefinition "Codage" {
+      description "Implémentation du code source selon les spécifications"
+      startDate "2025-03-01T00:00:00.000+0100"
+      endDate "2025-03-15T00:00:00.000+0100"
+      resource {
+        Humain "Eric" { role "Développeur" },
+        Humain "Eric-ai" { role "Développeur" },
+        Humain "Eric-alt" { role "Développeur" },
+        Humain "Eric-try" { role "Développeur" },
+        Humain "Erico" { role "Développeur" },
+        Materiel "IDE" { quantite 5 }
+      }
+    },
+    WorkDefinition "TestsUnitaires" {
+      description "Vérification individuelle des modules"
+      startDate "2025-03-01T00:00:00.000+0100"
+      endDate  "2025-04-10T00:00:00.000+0100"
+      resource {
+        Humain "Junior" { role "Testeur" },
+        Humain "Junior-ai" { role "Testeur" },
+        Materiel "JUnit" { quantite 1 }
+      }
+    },
+    WorkDefinition "TestsIntegration" {
+      description "Validation des interactions entre composants"
+      startDate "2025-04-11T00:00:00.000+0100"
+      endDate "2025-05-15T00:00:00.000+0100"
+      resource {
+        Humain "Junior-alt" { role "Testeur" },
+        Humain "Junior-try" { role "Testeur" },
+        Materiel "ServeurTest" { quantite 1 }
+      }
+    },
+    WorkDefinition "Validation" {
+      description "Acceptation finale par le client"
+      startDate "2025-05-01T00:00:00.000+0100"
+      endDate "2025-05-20T00:00:00.000+0100"
+      resource {
+        Humain "Bill Gates" { role "Client" }
+      }
+    },
+
+    // WorkSequences
+    WorkSequence "Exigences -> ConceptionSystème" {
+      description "La conception ne débute qu’après validation des exigences"
+      type finishToStart
+      predecessor "Exigences"
+      successor "ConceptionSystème"
+    },
+    WorkSequence "ConceptionSystème -> ConceptionLogicielle" {
+      description "Raffinement simultané de l’architecture et de la conception détaillée"
+      predecessor "ConceptionSystème"
+      successor "ConceptionLogicielle"
+    },
+    WorkSequence "ConceptionLogicielle -> Codage" {
+      description "Alignement des spécifications et du code avant finalisation"
+      type finishToFinish
+      predecessor "ConceptionLogicielle"
+      successor "Codage"
+    },
+    WorkSequence "Codage -> TestsUnitaires" {
+      description "Tests unitaires lancés en parallèle avec le développement"
+      predecessor "Codage"
+      successor "TestsUnitaires"
+    },
+    WorkSequence "TestsUnitaires -> TestsIntegration" {
+      description "Tests d’intégration déclenchés après validation des modules"
+      type finishToStart
+      predecessor "TestsUnitaires"
+      successor "TestsIntegration"
+    },
+    WorkSequence "TestsIntegration -> Validation" {
+      description "La validation client doit être terminée avant la clôture des tests d’intégration"
+      type startToFinish
+      predecessor "TestsIntegration"
+      successor "Validation"
+    }
+  }
+}

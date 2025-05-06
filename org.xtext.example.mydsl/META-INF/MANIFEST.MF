@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.xtext.example.mydsl
+Bundle-ManifestVersion: 2
+Bundle-Name: org.xtext.example.mydsl
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.xtext.example.mydsl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: mini.projet,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.19.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.38.0",
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Export-Package: org.xtext.simplepdl.parser.antlr.internal,
+ org.xtext.simplepdl.validation,
+ org.xtext.simplepdl.serializer,
+ org.xtext.simplepdl.myDsl.impl,
+ org.xtext.simplepdl.parser.antlr,
+ org.xtext.simplepdl.scoping,
+ org.xtext.simplepdl.myDsl,
+ org.xtext.simplepdl,
+ org.xtext.simplepdl.services,
+ org.xtext.simplepdl.formatting2,
+ org.xtext.simplepdl.myDsl.util,
+ org.xtext.simplepdl.generator
+Import-Package: org.apache.log4j
