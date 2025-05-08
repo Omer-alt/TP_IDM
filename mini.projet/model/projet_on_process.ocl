@@ -1,4 +1,5 @@
 import 'projet.ecore'
+import ecore : 'http://www.eclipse.org/emf/2002/Ecore'
 
 package projet
 
@@ -34,9 +35,15 @@ inv uniqueName:
 -- Une tâche doit avoir au moins une ressource assignée (humaine ou matérielle).
 context WorkDefinition  
 inv atLeastOneResource:  
-  self.resource->size() >= 1   
+  self.resource->size() >= 1
 
-
+--Si une tâche possède une date de début (startDate) et une date de fin (endDate), alors la date de début doit être antérieure ou égale à la date de fin.  
+context WorkDefinition
+inv startDateBeforeEndDate:
+    (self.startDate <> null and self.endDate <> null) 
+    implies 
+    (self.startDate <= self.endDate)   
+  
 -- Aucune tache ne depend d'elle meme
 context WorkSequence 
 inv noReflexivity : 	self.predecessor <> self.successor

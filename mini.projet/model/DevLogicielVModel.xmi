@@ -4,7 +4,6 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:projet="http://www.mini/projet"
-    xsi:schemaLocation="http://www.mini/projet projet.ecore"
     name="DevLogicielVModel">
   <processElements
       xsi:type="projet:WorkDefinition"

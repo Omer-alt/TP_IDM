@@ -19,6 +19,7 @@
     <genClasses ecoreClass="projet.ecore#//Process">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference projet.ecore#//Process/processElements"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//Process/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference projet.ecore#//Process/resource"/>
     </genClasses>
     <genClasses ecoreClass="projet.ecore#//ProcessElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute projet.ecore#//ProcessElement/name"/>

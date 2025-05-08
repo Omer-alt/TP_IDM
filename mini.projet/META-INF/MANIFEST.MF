@@ -1,7 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: mini.projet
-Bundle-SymbolicName: mini.projet; singleton:=true
+Bundle-Name: %pluginName
+Bundle-SymbolicName: mini.projet;singleton:=true
+Automatic-Module-Name: mini.projet
 Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Export-Package: mini.projet,
+ mini.projet.impl,
+ mini.projet.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
