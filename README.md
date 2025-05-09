@@ -10,15 +10,36 @@
 Ce mini‑projet s’inscrit dans le cadre du cours **INF5039 – Ingénierie Dirigée par les Modèles**.  
 L’objectif principal était de : 
 
-1. Étendre le méta‑modèle SimplePDL (v1) en y ajoutant ressources et descriptions textuelles (SimplePDL v2).  
-2. Définir et implémenter des contraintes OCL de cohérence.  
-3. Modéliser deux processus exemples avec Eclipse EMF.  
+1. Étendre le méta‑modèle SimplePDL (v1) en y ajoutant ressources et descriptions textuelles (SimplePDL v2). 
+![Meta-Model](/statics/metamodel.png) 
+2. Définir et implémenter des contraintes OCL de cohérence.
+[Fichier de Contraintes OCL a visiter](mini.projet/model/projet_on_process.ocl)
+
+
+3. Modéliser deux processus exemples avec Eclipse EMF: 
+ - [ Description des phases du processus de d ́eveloppement logiciel ( Modele en V )](mini.projet/model/DevLogicielVModel.xmi)
+ -  [ Preparation d’un examen](mini.projet/model/PrepareExamen.xmi)
+
 4. Produire deux transformations Acceleo :
-   - **SimplePDLToHTML** : génération d’une documentation HTML.  
-   - **SimplePDL2DOT** : génération d’un graphe DOT pour Graphviz.  
+   - **SimplePDLToHTML** : génération d’une documentation HTML; 
+      -  [ Fichier de transformation en HTML](SimplePDLToHTML/src/SimplePDLToHTML/main/generate.mtl)
+      - [ Fichier de SORTIE de la transformation en HTML](SimplePDLToHTML/ouput_code/DevLogicielVModel.html) 
+   - **SimplePDL2DOT** : génération d’un graphe DOT pour Graphviz;
+      -  [ Fichier de transformation en DOT](SimplePDL2DOT/src/SimplePDL2DOT/main/generate.mtl) 
+
+      - [ Fichier de SORTIE de la transformation en DOT](SimplePDL2DOT/output_code/DevLogicielVModel.dot) 
+
 5. Syntaxe concrète
+   - **Proposer une syntaxe concrète graphique avec Sirius** : 
+   ![Meta-Model](/statics/v_model_with_siruis.png) 
 
-
+   - **Proposer une syntaxe concrète textuelle avec Xtext** : 
+      - Coloration
+      - Auto Completion
+   ![Language reconu](/statics/language_reconu.png)
+      - Representation Hierachique de processus defini dans le Langage 
+      
+      ![Hierachical representation](/statics/hierachical.png)
 
 ---
 
@@ -36,10 +57,7 @@ L’objectif principal était de :
 ## 3. Installation & Import des projets
 
 1. **Cloner ou extraire** ce dépôt sur votre machine.  
-2. Dans Eclipse, **Import ▶ Existing Projects into Workspace** et sélectionner les trois sous‑dossiers :  
-   - `mini.projet`  
-   - `SimplePDLToHTML`  
-   - `SimplePDL2DOT`  
+2. Dans Eclipse, **Import ▶ Existing Projects into Workspace** 
 
 ---
 
